@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>جهاز الترا سونيك لتنظيف البشرة | أوفرات مصر</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@500;600;700&family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0F2733;
+    --ink-soft:#3E5866;
+    --sea:#0F4C6B;
+    --sea-deep:#093347;
+    --teal:#2E9CA6;
+    --coral:#FF8C6B;
+    --coral-deep:#E86A48;
+    --mist:#EFF6F8;
+    --paper:#FFFFFF;
+    --line:#DCE9EC;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Tajawal', sans-serif;
+    background:var(--mist);
+    color:var(--ink);
+    line-height:1.7;
+  }
+  h1,h2,h3,.brand{font-family:'El Messiri', serif;}
+  img{max-width:100%; display:block;}
+  a{color:inherit;}
+  .wrap{max-width:1120px; margin:0 auto; padding:0 24px;}
+
+  /* Top bar */
+  .topbar{
+    background:var(--sea-deep);
+    color:#DCEEF2;
+    font-size:14px;
+    padding:9px 0;
+    text-align:center;
+    letter-spacing:.2px;
+  }
+  .topbar strong{color:#FFD9C9;}
+
+  header.site{
+    background:var(--paper);
+    border-bottom:1px solid var(--line);
+    position:sticky; top:0; z-index:50;
+  }
+  .site .wrap{display:flex; align-items:center; justify-content:space-between; padding-block:14px;}
+  .brand{font-size:22px; color:var(--sea-deep); font-weight:700;}
+  .brand span{color:var(--teal);}
+  .cta-mini{
+    background:var(--coral); color:#fff; border:none;
+    font-family:'Tajawal',sans-serif; font-weight:700; font-size:15px;
+    padding:11px 22px; border-radius:8px; cursor:pointer;
+  }
+
+  /* Hero */
+  .hero{
+    background:linear-gradient(160deg, #E7F3F5 0%, #D9EDEF 55%, #CFE7EA 100%);
+    overflow:hidden;
+    position:relative;
+  }
+  .hero .wrap{
+    display:grid; grid-template-columns: 1.05fr 0.95fr; gap:40px;
+    align-items:center; padding-block:56px;
+  }
+  .hero-copy .kicker{
+    display:inline-block; color:var(--sea-deep); background:#FFFFFF;
+    border:1px solid var(--line); padding:6px 14px; border-radius:100px;
+    font-size:13px; font-weight:700; margin-bottom:18px;
+  }
+  .hero-copy h1{
+    font-size:42px; line-height:1.28; color:var(--sea-deep); font-weight:700;
+    margin-bottom:18px;
+  }
+  .hero-copy h1 em{font-style:normal; color:var(--teal);}
+  .hero-copy p.lead{
+    font-size:17px; color:var(--ink-soft); max-width:480px; margin-bottom:26px;
+  }
+  .price-row{display:flex; align-items:baseline; gap:12px; margin-bottom:26px;}
+  .price-now{font-size:34px; font-weight:900; color:var(--sea-deep); font-family:'El Messiri',serif;}
+  .price-old{font-size:18px; color:#9BAFB6; text-decoration:line-through;}
+  .price-note{font-size:13px; color:var(--ink-soft);}
+  .hero-btn{
+    display:inline-block; background:var(--coral); color:#fff; font-weight:700;
+    font-size:17px; padding:16px 34px; border-radius:10px; text-decoration:none;
+    box-shadow:0 10px 24px -8px rgba(232,106,72,.55);
+  }
+  .hero-trust{display:flex; gap:22px; margin-top:26px; flex-wrap:wrap;}
+  .hero-trust div{font-size:13px; color:var(--sea-deep); font-weight:700; display:flex; align-items:center; gap:6px;}
+  .hero-trust div::before{content:"✓"; color:var(--teal); font-weight:900;}
+  .hero-img{position:relative;}
+  .hero-img img{border-radius:18px;}
+
+  /* section headings */
+  .section-head{text-align:center; max-width:620px; margin:0 auto 40px;}
+  .section-head .kicker{color:var(--teal); font-weight:700; font-size:13px; letter-spacing:.3px;}
+  .section-head h2{font-size:30px; color:var(--sea-deep); margin-top:8px;}
+  .section-head p{color:var(--ink-soft); margin-top:10px; font-size:15.5px;}
+
+  section{padding-block:66px;}
+  section.alt{background:var(--paper);}
+
+  /* Problem/benefit strip */
+  .problems{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:18px;
+  }
+  .problems .card{
+    background:var(--paper); border:1px solid var(--line); border-radius:14px;
+    padding:22px 18px; text-align:center;
+  }
+  .problems .card .ico{font-size:26px; margin-bottom:10px;}
+  .problems .card h3{font-size:15.5px; color:var(--sea-deep); margin-bottom:6px;}
+  .problems .card p{font-size:13.5px; color:var(--ink-soft);}
+
+  /* feature rows */
+  .feature-row{
+    display:grid; grid-template-columns:0.9fr 1.1fr; gap:48px; align-items:center;
+    margin-bottom:64px;
+  }
+  .feature-row:nth-child(even){grid-template-columns:1.1fr 0.9fr;}
+  .feature-row:nth-child(even) .feature-copy{order:2;}
+  .feature-row:last-child{margin-bottom:0;}
+  .feature-copy .num{color:var(--teal); font-weight:900; font-size:14px; margin-bottom:10px;}
+  .feature-copy h3{font-size:24px; color:var(--sea-deep); margin-bottom:12px;}
+  .feature-copy p{color:var(--ink-soft); font-size:15.5px; margin-bottom:14px;}
+  .feature-copy ul{list-style:none;}
+  .feature-copy li{font-size:14.5px; color:var(--ink); padding-inline-start:24px; position:relative; margin-bottom:8px;}
+  .feature-copy li::before{content:"✓"; position:absolute; inset-inline-start:0; color:var(--teal); font-weight:900;}
+  .feature-img img{border-radius:16px; border:1px solid var(--line);}
+
+  /* modes */
+  .modes{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
+  .mode-card{
+    background:var(--sea-deep); color:#fff; border-radius:16px; padding:26px 22px;
+  }
+  .mode-card h3{font-size:17px; margin-bottom:8px; color:#fff;}
+  .mode-card p{font-size:13.5px; color:#B7D3DA;}
+  .mode-card .tag{
+    display:inline-block; background:var(--teal); color:#08272B; font-weight:700;
+    font-size:12px; padding:4px 10px; border-radius:100px; margin-bottom:12px;
+  }
+
+  /* specs */
+  .specs-wrap{display:grid; grid-template-columns:1fr 1fr; gap:44px; align-items:center;}
+  .specs-table{width:100%; border-collapse:collapse;}
+  .specs-table tr{border-bottom:1px solid var(--line);}
+  .specs-table td{padding:13px 4px; font-size:14.5px;}
+  .specs-table td:first-child{color:var(--ink-soft); width:38%;}
+  .specs-table td:last-child{color:var(--sea-deep); font-weight:700;}
+
+  /* order section */
+  .order{
+    background:linear-gradient(160deg,#0F4C6B,#093347);
+    color:#fff;
+  }
+  .order .section-head h2{color:#fff;}
+  .order .section-head p{color:#BFDBE2;}
+  .order .section-head .kicker{color:#FFB89E;}
+  .order-panel{
+    display:grid; grid-template-columns:0.9fr 1.1fr; gap:0;
+    background:#fff; border-radius:20px; overflow:hidden;
+    max-width:920px; margin:0 auto;
+    box-shadow:0 30px 60px -30px rgba(0,0,0,.5);
+  }
+  .order-summary{
+    background:var(--mist); padding:34px 30px; color:var(--ink);
+  }
+  .order-summary img{border-radius:12px; margin-bottom:18px;}
+  .order-summary h3{color:var(--sea-deep); font-size:19px; margin-bottom:10px;}
+  .order-summary .line{
+    display:flex; justify-content:space-between; font-size:14.5px;
+    padding:9px 0; border-bottom:1px dashed #C9DDE1; color:var(--ink-soft);
+  }
+  .order-summary .line strong{color:var(--sea-deep);}
+  .order-summary .total{
+    display:flex; justify-content:space-between; font-size:19px; font-weight:900;
+    color:var(--sea-deep); padding-top:14px;
+  }
+  .order-form{padding:34px 30px;}
+  .order-form label{
+    display:block; font-size:13.5px; font-weight:700; color:var(--sea-deep);
+    margin-bottom:6px; margin-top:16px;
+  }
+  .order-form label:first-of-type{margin-top:0;}
+  .order-form input, .order-form select{
+    width:100%; border:1px solid var(--line); border-radius:8px;
+    padding:12px 14px; font-family:'Tajawal',sans-serif; font-size:14.5px;
+    background:var(--mist); color:var(--ink);
+  }
+  .order-form input:focus, .order-form select:focus{outline:2px solid var(--teal); background:#fff;}
+  .qty-row{display:flex; align-items:center; gap:10px; margin-top:6px;}
+  .qty-row button{
+    width:38px; height:38px; border-radius:8px; border:1px solid var(--line);
+    background:var(--mist); font-size:18px; cursor:pointer; color:var(--sea-deep);
+  }
+  .qty-row span{font-weight:700; font-size:16px; min-width:22px; text-align:center;}
+  .submit-btn{
+    width:100%; margin-top:24px; background:var(--coral); color:#fff; border:none;
+    padding:15px; border-radius:10px; font-family:'Tajawal',sans-serif;
+    font-weight:900; font-size:16.5px; cursor:pointer;
+  }
+  .submit-btn:hover{background:var(--coral-deep);}
+  .form-note{font-size:12px; color:var(--ink-soft); margin-top:10px; text-align:center;}
+  .success-msg{
+    display:none; text-align:center; padding:40px 20px;
+  }
+  .success-msg .check{
+    width:56px; height:56px; border-radius:50%; background:var(--teal); color:#fff;
+    display:flex; align-items:center; justify-content:center; font-size:26px;
+    margin:0 auto 16px;
+  }
+  .success-msg h3{color:var(--sea-deep); font-size:19px; margin-bottom:8px;}
+  .success-msg p{color:var(--ink-soft); font-size:14.5px;}
+
+  /* reviews */
+  .reviews{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
+  .review-card{
+    background:var(--paper); border:1px solid var(--line); border-radius:14px; padding:22px;
+  }
+  .review-card .stars{color:#F5A623; font-size:14px; margin-bottom:10px;}
+  .review-card p{font-size:14.5px; color:var(--ink); margin-bottom:14px;}
+  .review-card .who{font-size:13px; color:var(--ink-soft); font-weight:700;}
+
+  /* FAQ */
+  .faq-item{border-bottom:1px solid var(--line); padding:18px 0;}
+  .faq-item summary{
+    cursor:pointer; font-weight:700; color:var(--sea-deep); font-size:15.5px;
+    list-style:none; display:flex; justify-content:space-between; align-items:center;
+  }
+  .faq-item summary::-webkit-details-marker{display:none;}
+  .faq-item summary::after{content:"+"; font-size:22px; color:var(--teal); font-weight:400;}
+  .faq-item[open] summary::after{content:"–";}
+  .faq-item p{margin-top:10px; color:var(--ink-soft); font-size:14.5px;}
+
+  footer{background:var(--sea-deep); color:#A9C9D1; padding:36px 0; text-align:center; font-size:13.5px;}
+  footer .brand{color:#fff; margin-bottom:8px; font-size:19px;}
+
+  .sticky-cta{
+    position:fixed; bottom:0; inset-inline:0; background:#fff; border-top:1px solid var(--line);
+    padding:12px 20px; display:none; align-items:center; justify-content:space-between;
+    z-index:60; box-shadow:0 -8px 20px -10px rgba(0,0,0,.15);
+  }
+  .sticky-cta strong{color:var(--sea-deep); font-size:16px;}
+  .sticky-cta a{
+    background:var(--coral); color:#fff; font-weight:700; padding:11px 24px;
+    border-radius:8px; text-decoration:none; font-size:14.5px;
+  }
+
+  @media (max-width:860px){
+    .hero .wrap{grid-template-columns:1fr; padding-block:36px;}
+    .hero-img{order:-1;}
+    .hero-copy h1{font-size:30px;}
+    .problems{grid-template-columns:repeat(2,1fr);}
+    .feature-row, .feature-row:nth-child(even){grid-template-columns:1fr !important;}
+    .feature-row:nth-child(even) .feature-copy{order:0;}
+    .modes{grid-template-columns:1fr;}
+    .specs-wrap{grid-template-columns:1fr; gap:24px;}
+    .order-panel{grid-template-columns:1fr;}
+    .reviews{grid-template-columns:1fr;}
+    .sticky-cta{display:flex;}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">شحن لكل محافظات مصر 🚚 · الدفع عند الاستلام · <strong>عرض لفترة محدودة</strong></div>
+
+<header class="site">
+  <div class="wrap">
+    <div class="brand">أوفرات <span>مصر</span></div>
+    <button class="cta-mini" onclick="document.getElementById('order').scrollIntoView({behavior:'smooth'})">اطلبي الآن</button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-copy">
+      <span class="kicker">جهاز تنظيف البشرة بالموجات فوق الصوتية</span>
+      <h1>وداعًا للرؤوس السوداء<br>مع تنظيف <em>عميق ولطيف</em> من أول استخدام</h1>
+      <p class="lead">جهاز الترا سونيك 4 في 1 بيشيل الدهون والشوائب المتراكمة في المسام، ويحسّن امتصاص السيروم والكريم، وكل ده في دقايق من المنزل.</p>
+      <div class="price-row">
+        <span class="price-now">499 ج.م</span>
+        <span class="price-old">650 ج.م</span>
+        <span class="price-note">+ 35 ج.م مصاريف شحن</span>
+      </div>
+      <a href="#order" class="hero-btn">اطلبي دلوقتي وادفعي عند الاستلام</a>
+      <div class="hero-trust">
+        <div>رأس استانلس ستيل آمن</div>
+        <div>مناسب لكل أنواع البشرة</div>
+        <div>شحن وقابل لإعادة الشحن USB</div>
+      </div>
+    </div>
+    <div class="hero-img">
+      <img src="images/hero.png" alt="جهاز الترا سونيك لتنظيف البشرة">
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">بتعاني من إيه؟</span>
+      <h2>مشاكل بشرة يومية، وحل واحد بسيط</h2>
+    </div>
+    <div class="problems">
+      <div class="card"><div class="ico">🫧</div><h3>مسام مسدودة</h3><p>تراكم الزيوت والشوائب بيبان في ملمس البشرة الخشن</p></div>
+      <div class="card"><div class="ico">⚫</div><h3>رؤوس سوداء</h3><p>بتتكرر كل شوية مهما نضّفتي بشرتك بطرق عادية</p></div>
+      <div class="card"><div class="ico">💧</div><h3>منتجات العناية مش بتمتص كويس</h3><p>السيروم والكريم بيفضلوا على السطح بدل ما يتوغلوا</p></div>
+      <div class="card"><div class="ico">✨</div><h3>بشرة تعبانة ومش مشدودة</h3><p>محتاجة روتين عناية احترافي من غير تكلفة السنتر</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="features">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">ليه الجهاز ده بالذات</span>
+      <h2>4 وظائف في جهاز واحد صغير</h2>
+    </div>
+
+    <div class="feature-row">
+      <div class="feature-copy">
+        <div class="num">01</div>
+        <h3>اهتزاز عالي التردد حتى 24,000 مرة في الدقيقة</h3>
+        <p>تقنية Ultrasonic بتفكك الدهون والشوائب المتراكمة جوه المسام وتسحبها للسطح بسهولة، من غير خدش أو ألم.</p>
+        <ul>
+          <li>تنظيف عميق وآمن على البشرة</li>
+          <li>يستخدم على بشرة مبللة لنتيجة أفضل</li>
+          <li>مناسب للاستخدام كل أسبوعين إلى 3 مرات أسبوعيًا</li>
+        </ul>
+      </div>
+      <div class="feature-img"><img src="images/on-face.png" alt="استخدام الجهاز على البشرة"></div>
+    </div>
+
+    <div class="feature-row">
+      <div class="feature-copy">
+        <div class="num">02</div>
+        <h3>رأس استانلس ستيل مقاوم للصدأ</h3>
+        <p>رأس معدني عالي الجودة سهل التنظيف بعد كل استخدام، وآمن تمامًا على أنواع البشرة الحساسة.</p>
+        <ul>
+          <li>لا يسبب احمرار أو تهيج</li>
+          <li>عمر افتراضي طويل بدون تآكل</li>
+          <li>سهل التعقيم بالماء الفاتر</li>
+        </ul>
+      </div>
+      <div class="feature-img"><img src="images/head-closeup.png" alt="رأس الجهاز المعدني"></div>
+    </div>
+
+    <div class="feature-row">
+      <div class="feature-copy">
+        <div class="num">03</div>
+        <h3>فرشتين سيليكون للتقشير اللطيف</h3>
+        <p>مرفق مع الجهاز فرشتين سيليكون لتنظيف وتدليك البشرة، بتشتغلوا مع الجهاز في روتين عناية متكامل.</p>
+        <ul>
+          <li>مناسبة للاستخدام اليومي اللطيف</li>
+          <li>تساعد على تنشيط الدورة الدموية بالوجه</li>
+          <li>سهلة الغسيل وإعادة الاستخدام</li>
+        </ul>
+      </div>
+      <div class="feature-img"><img src="images/kit-2.png" alt="ملحقات الجهاز"></div>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">4 أوضاع تشغيل</span>
+      <h2>اختاري الوضع المناسب لبشرتك</h2>
+    </div>
+    <div class="modes">
+      <div class="mode-card"><span class="tag">تنظيف</span><h3>Deep Cleansing</h3><p>إزالة الدهون والشوائب من عمق المسام</p></div>
+      <div class="mode-card"><span class="tag">أيونات سالبة</span><h3>Ion In</h3><p>تحسين امتصاص السيروم والكريمات للبشرة</p></div>
+      <div class="mode-card"><span class="tag">أيونات موجبة</span><h3>Ion Out</h3><p>سحب الشوائب والزيوت المتراكمة للسطح</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">المواصفات</span>
+      <h2>تفاصيل الجهاز</h2>
+    </div>
+    <div class="specs-wrap">
+      <div>
+        <img src="images/infographic.png" alt="مواصفات جهاز الترا سونيك" style="border-radius:16px; border:1px solid var(--line);">
+      </div>
+      <table class="specs-table">
+        <tr><td>النوع</td><td>جهاز تنظيف وتقشير بالموجات فوق الصوتية</td></tr>
+        <tr><td>التقنية</td><td>Ultrasonic Technology</td></tr>
+        <tr><td>الخامة</td><td>ABS + رأس استانلس ستيل</td></tr>
+        <tr><td>مصدر الطاقة</td><td>بطارية قابلة لإعادة الشحن عبر USB</td></tr>
+        <tr><td>الوزن</td><td>150 جرام تقريبًا</td></tr>
+        <tr><td>عدد الأوضاع</td><td>4 أوضاع تشغيل</td></tr>
+        <tr><td>الفئة</td><td>مناسب للنساء والرجال، لكل أنواع البشرة</td></tr>
+        <tr><td>محتويات العلبة</td><td>الجهاز + فرشتين سيليكون + كابل شحن</td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">آراء العملاء</span>
+      <h2>تجارب حقيقية مع الجهاز</h2>
+    </div>
+    <div class="reviews">
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <p>حسيت بفرق من أول مرة، البشرة بقت أنعم والرؤوس السوداء قلّت بشكل واضح بعد أسبوعين استخدام.</p>
+        <div class="who">مريم، القاهرة</div>
+      </div>
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <p>سهل الاستخدام جدًا وصغير أاخده معايا في الشنطة، والشحن وصل بسرعة.</p>
+        <div class="who">هبة، الجيزة</div>
+      </div>
+      <div class="review-card">
+        <div class="stars">★★★★☆</div>
+        <p>الكريمات بقت بتمتص أسرع بعد ما بستخدم الجهاز، فرق حسيته بصراحة.</p>
+        <div class="who">نورهان، المنصورة</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap" style="max-width:760px;">
+    <div class="section-head">
+      <span class="kicker">أسئلة شائعة</span>
+      <h2>محتاجة تعرفي أكتر؟</h2>
+    </div>
+    <details class="faq-item" open>
+      <summary>الجهاز مناسب لأي نوع بشرة؟</summary>
+      <p>أيوه، الجهاز مصمم ليكون لطيف وآمن على كل أنواع البشرة: الدهنية، الجافة، المختلطة، والحساسة.</p>
+    </details>
+    <details class="faq-item">
+      <summary>أستخدمه قد إيه في الأسبوع؟</summary>
+      <p>بينصح باستخدامه من مرتين لـ3 مرات أسبوعيًا للحصول على أفضل نتيجة من غير إجهاد للبشرة.</p>
+    </details>
+    <details class="faq-item">
+      <summary>الدفع عند الاستلام متاح؟</summary>
+      <p>أيوه، تقدري تدفعي كاش للمندوب وقت استلام الأوردر في أي محافظة.</p>
+    </details>
+    <details class="faq-item">
+      <summary>هوصل بعد كام يوم؟</summary>
+      <p>مدة التوصيل من 3 إلى 5 أيام عمل حسب المحافظة.</p>
+    </details>
+  </div>
+</section>
+
+<section class="order" id="order">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">اطلبي دلوقتي</span>
+      <h2>احجزي جهازك قبل نفاد الكمية</h2>
+      <p>الدفع عند الاستلام · شحن لكل محافظات مصر</p>
+    </div>
+    <div class="order-panel">
+      <div class="order-summary">
+        <img src="images/kit-1.png" alt="جهاز الترا سونيك مع الملحقات">
+        <h3>جهاز الترا سونيك لتنظيف البشرة 4 في 1</h3>
+        <div class="line"><span>سعر القطعة</span><strong>499 ج.م</strong></div>
+        <div class="line"><span>مصاريف الشحن</span><strong>35 ج.م</strong></div>
+        <div class="total"><span>الإجمالي</span><span id="totalPrice">534 ج.م</span></div>
+      </div>
+      <div class="order-form">
+        <form id="orderForm">
+          <label for="name">الاسم بالكامل</label>
+          <input type="text" id="name" required placeholder="اكتبي اسمك">
+
+          <label for="phone">رقم الموبايل</label>
+          <input type="tel" id="phone" required placeholder="01xxxxxxxxx" pattern="^01[0-9]{9}$">
+
+          <label for="governorate">المحافظة</label>
+          <select id="governorate" required>
+            <option value="">اختاري المحافظة</option>
+            <option>القاهرة</option><option>الجيزة</option><option>الإسكندرية</option>
+            <option>الدقهلية</option><option>الشرقية</option><option>القليوبية</option>
+            <option>المنوفية</option><option>الغربية</option><option>البحيرة</option>
+            <option>كفر الشيخ</option><option>دمياط</option><option>بورسعيد</option>
+            <option>الإسماعيلية</option><option>السويس</option><option>شمال سيناء</option>
+            <option>جنوب سيناء</option><option>الفيوم</option><option>بني سويف</option>
+            <option>المنيا</option><option>أسيوط</option><option>سوهاج</option>
+            <option>قنا</option><option>الأقصر</option><option>أسوان</option>
+            <option>البحر الأحمر</option><option>الوادي الجديد</option><option>مطروح</option>
+          </select>
+
+          <label for="address">العنوان بالتفصيل</label>
+          <input type="text" id="address" required placeholder="الحي، الشارع، رقم العقار">
+
+          <label>الكمية</label>
+          <div class="qty-row">
+            <button type="button" id="qtyMinus">−</button>
+            <span id="qtyValue">1</span>
+            <button type="button" id="qtyPlus">+</button>
+          </div>
+
+          <button type="submit" class="submit-btn">تأكيد الطلب</button>
+          <p class="form-note">هيتم التواصل معاكِ خلال ساعة لتأكيد الطلب قبل الشحن</p>
+        </form>
+        <div class="success-msg" id="successMsg">
+          <div class="check">✓</div>
+          <h3>تم استلام طلبك بنجاح</h3>
+          <p>فريق أوفرات مصر هيتواصل معاكِ قريب لتأكيد التفاصيل.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="brand">أوفرات مصر</div>
+    <p>Offarat Egypt — منتجات عناية بالبشرة موثوقة، بتوصلك لحد باب البيت</p>
+  </div>
+</footer>
+
+<div class="sticky-cta">
+  <strong>534 ج.م شامل الشحن</strong>
+  <a href="#order">اطلبي الآن</a>
+</div>
+
+<script>
+  const unitPrice = 499;
+  const shipping = 35;
+  let qty = 1;
+  const qtyValueEl = document.getElementById('qtyValue');
+  const totalPriceEl = document.getElementById('totalPrice');
+
+  function updateTotal(){
+    qtyValueEl.textContent = qty;
+    const total = (unitPrice * qty) + shipping;
+    totalPriceEl.textContent = total + ' ج.م';
+  }
+
+  document.getElementById('qtyPlus').addEventListener('click', () => {
+    qty = Math.min(qty + 1, 10);
+    updateTotal();
+  });
+  document.getElementById('qtyMinus').addEventListener('click', () => {
+    qty = Math.max(qty - 1, 1);
+    updateTotal();
+  });
+
+  document.getElementById('orderForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    // ملاحظة: النموذج ده حاليًا بيعرض رسالة تأكيد بصريًا فقط.
+    // لازم يتوصل بأي نظام استقبال طلبات حقيقي (Google Sheet / API / واتساب) قبل التشغيل الفعلي.
+    this.style.display = 'none';
+    document.getElementById('successMsg').style.display = 'block';
+  });
+</script>
+
+</body>
+</html>
