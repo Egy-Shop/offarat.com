@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>تم استلام طلبك | أوفرات مصر</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@500;600;700&family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+<!--
+  مكان تركيب Meta Pixel لصفحة الشكر — لسه معملتش Pixel جديد، فهو متسيب فاضي عن قصد.
+  لما يبقى عندك PIXEL_ID بتاعك، حط بدل PIXEL_ID_HERE تحت وشيل الـ /* */ من حواليه.
+  حدث الـ Purchase تحت في آخر الصفحة هيشتغل تلقائيًا (مع eventID للـ Dedup) بمجرد ما fbq يبقى موجود.
+
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', 'PIXEL_ID_HERE');
+  </script>
+-->
+
+<style>
+  :root{
+    --ink:#0F2733;
+    --ink-soft:#3E5866;
+    --sea-deep:#093347;
+    --teal:#2E9CA6;
+    --coral:#FF8C6B;
+    --mist:#EFF6F8;
+    --line:#DCE9EC;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    font-family:'Tajawal', sans-serif;
+    background:var(--mist);
+    color:var(--ink);
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+  }
+  h1,h2{font-family:'El Messiri', serif;}
+  header{
+    background:#fff; border-bottom:1px solid var(--line);
+    padding:16px 0; text-align:center;
+  }
+  header img{height:34px; margin:0 auto;}
+  main{
+    flex:1; display:flex; align-items:center; justify-content:center; padding:32px 20px;
+  }
+  .card{
+    background:#fff; border-radius:20px; max-width:480px; width:100%;
+    padding:44px 32px; text-align:center; box-shadow:0 24px 50px -30px rgba(9,51,71,.35);
+  }
+  .check{
+    width:70px; height:70px; border-radius:50%; background:var(--teal); color:#fff;
+    display:flex; align-items:center; justify-content:center; font-size:34px;
+    margin:0 auto 22px;
+  }
+  h1{font-size:24px; color:var(--sea-deep); margin-bottom:12px;}
+  .card p{color:var(--ink-soft); font-size:15px; margin-bottom:8px;}
+  .order-total{
+    background:var(--mist); border-radius:12px; padding:14px 18px; margin:22px 0;
+    font-size:17px; font-weight:900; color:var(--sea-deep); display:none;
+  }
+  .steps{
+    text-align:right; margin-top:26px; padding-top:22px; border-top:1px dashed var(--line);
+  }
+  .steps h2{font-size:15px; color:var(--sea-deep); margin-bottom:12px;}
+  .steps ol{padding-inline-start:20px; color:var(--ink-soft); font-size:14px;}
+  .steps li{margin-bottom:8px;}
+  .home-btn{
+    display:inline-block; margin-top:26px; background:var(--coral); color:#fff;
+    font-weight:700; padding:13px 28px; border-radius:10px; text-decoration:none; font-size:15px;
+  }
+  footer{
+    text-align:center; padding:20px; color:var(--ink-soft); font-size:13px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <img src="images/logo.png" alt="Offarat.eg">
+</header>
+
+<main>
+  <div class="card">
+    <div class="check">✓</div>
+    <h1>تم استلام طلبك بنجاح</h1>
+    <p>شكرًا لثقتك في أوفرات مصر 💙</p>
+    <p>فريقنا هيتواصل معاكِ خلال ساعة لتأكيد الطلب قبل الشحن.</p>
+
+    <div class="order-total" id="orderTotal"></div>
+
+    <div class="steps">
+      <h2>الخطوات الجاية</h2>
+      <ol>
+        <li>هيتصل بيكِ موظف من فريقنا لتأكيد بيانات الطلب</li>
+        <li>هيتم تجهيز الشحنة وإرسالها لعنوانك</li>
+        <li>الدفع كاش عند استلام الأوردر من المندوب</li>
+      </ol>
+    </div>
+
+    <a href="index.html" class="home-btn">العودة للصفحة الرئيسية</a>
+  </div>
+</main>
+
+<footer>Offarat.eg — أوفرات مصر</footer>
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const total = params.get('total');
+  const eventId = params.get('eventId') || '';
+
+  if(total){
+    const el = document.getElementById('orderTotal');
+    el.textContent = 'إجمالي طلبك: ' + total + ' ج.م';
+    el.style.display = 'block';
+  }
+
+  // بنبعت حدث الـ Purchase بنفس eventId اللي راح للـ Apps Script،
+  // عشان ميتا تعتبر حدث المتصفح وحدث السيرفر (Conversions API) نفس الحدث.
+  if(typeof fbq === 'function'){
+    fbq('track', 'Purchase', {
+      value: total ? Number(total) : 0,
+      currency: 'EGP'
+    }, { eventID: eventId });
+  }
+</script>
+
+</body>
+</html>
