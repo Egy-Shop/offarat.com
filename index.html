@@ -116,6 +116,18 @@
     animation:pulseBadge 1.8s ease-in-out infinite;
   }
   .price-note{font-size:13px; color:var(--ink-soft); flex-basis:100%;}
+  .discount-wrap{display:inline-flex; align-items:baseline; gap:12px;}
+  .countdown-box{
+    display:flex; align-items:center; gap:10px; background:#FFF1EC; border:1px solid #FFD9CB;
+    color:var(--coral-deep); font-size:14px; font-weight:700; padding:10px 16px;
+    border-radius:10px; margin-bottom:22px; max-width:fit-content;
+  }
+  .countdown-timer{
+    font-family:'El Messiri', serif; font-size:17px; font-weight:900; letter-spacing:1px;
+    background:#fff; padding:3px 10px; border-radius:6px; direction:ltr;
+  }
+  .countdown-box.expired{background:#F1F3F4; border-color:var(--line); color:var(--ink-soft);}
+  .countdown-box.expired .countdown-timer{display:none;}
   .hero-btn{
     display:inline-block; background:var(--coral); color:#fff; font-weight:700;
     font-size:17px; padding:16px 34px; border-radius:10px; text-decoration:none;
@@ -404,10 +416,16 @@
       <h1>وداعًا للرؤوس السوداء<br>مع تنظيف <em>عميق ولطيف</em> من أول استخدام</h1>
       <p class="lead">جهاز الترا سونيك 4 في 1 بيشيل الدهون والشوائب المتراكمة في المسام، ويحسّن امتصاص السيروم والكريم، وكل ده في دقايق من المنزل.</p>
       <div class="price-row">
-        <span class="price-now">499 ج.م</span>
-        <span class="price-old">1665 ج.م</span>
-        <span class="discount-badge">خصم 70%</span>
+        <span class="price-now" id="priceNow">499 ج.م</span>
+        <span class="discount-wrap" id="discountWrap">
+          <span class="price-old">1665 ج.م</span>
+          <span class="discount-badge">خصم 70%</span>
+        </span>
         <span class="price-note" id="priceNote">+ 35 ج.م مصاريف شحن (شحن مجاني من قطعتين)</span>
+      </div>
+      <div class="countdown-box" id="countdownBox">
+        <span>⏰ العرض ده بيخلص خلال</span>
+        <span class="countdown-timer" id="countdownTimer">23:59:59</span>
       </div>
       <a href="#order" class="hero-btn">اطلبي دلوقتي وادفعي عند الاستلام</a>
       <div class="hero-trust">
@@ -418,7 +436,7 @@
       </div>
     </div>
     <div class="hero-img">
-      <span class="ribbon">خصم 70%</span>
+      <span class="ribbon" id="discountRibbon">خصم 70%</span>
       <img src="images/hero.png" alt="جهاز الترا سونيك لتنظيف البشرة">
     </div>
   </div>
@@ -615,7 +633,7 @@
           <div class="track"><div class="fill" id="stockFill" style="width:100%;"></div></div>
         </div>
         <h3>جهاز الترا سونيك لتنظيف البشرة 4 في 1</h3>
-        <div class="line"><span>سعر القطعة</span><strong>499 ج.م</strong></div>
+        <div class="line"><span>سعر القطعة</span><strong id="unitPriceLine">499 ج.م</strong></div>
         <div class="line"><span>مصاريف الشحن</span><strong id="shippingValue">35 ج.م</strong></div>
         <div class="total"><span>الإجمالي</span><span id="totalPrice">534 ج.م</span></div>
       </div>
@@ -682,11 +700,12 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function(){
-  const unitPrice = 499;
+  let unitPrice = 499;
   const oldPrice = 1665;
   const shippingCost = 35;
   const freeShippingFromQty = 2;
   let qty = 1;
+  let offerExpired = false;
   const qtyValueEl = document.getElementById('qtyValue');
   const totalPriceEl = document.getElementById('totalPrice');
   const shippingValueEl = document.getElementById('shippingValue');
@@ -694,6 +713,12 @@ document.addEventListener('DOMContentLoaded', function(){
   const qtyPlusBtn = document.getElementById('qtyPlus');
   const qtyMinusBtn = document.getElementById('qtyMinus');
   const orderForm = document.getElementById('orderForm');
+  const priceNowEl = document.getElementById('priceNow');
+  const unitPriceLineEl = document.getElementById('unitPriceLine');
+  const discountWrapEl = document.getElementById('discountWrap');
+  const discountRibbonEl = document.getElementById('discountRibbon');
+  const countdownBoxEl = document.getElementById('countdownBox');
+  const countdownTimerEl = document.getElementById('countdownTimer');
 
   function currentShipping(){
     return qty >= freeShippingFromQty ? 0 : shippingCost;
@@ -706,6 +731,78 @@ document.addEventListener('DOMContentLoaded', function(){
     if(shippingValueEl) shippingValueEl.textContent = shipping === 0 ? 'مجاني' : (shipping + ' ج.م');
     if(totalPriceEl) totalPriceEl.textContent = total + ' ج.م';
     if(stickyTotalEl) stickyTotalEl.textContent = total + ' ج.م' + (shipping === 0 ? ' (شحن مجاني)' : ' شامل الشحن');
+  }
+
+  // ===== كاونت داون العرض (24 ساعة لكل زائر) =====
+  // ده مربوط بالمتصفح/الجهاز بتاع الزائر (localStorage) مش بالـ IP فعليًا،
+  // لأن صفحة ثابتة على GitHub Pages مفيهاش سيرفر يقدر يتعرف على IP ويخزن حالة بتاعته.
+  // عمليًا ده بيدي نفس الأثر المطلوب: نفس الشخص (نفس المتصفح) هيشوف نفس العداد يفضل شغال
+  // من غير ما يرجع لـ 24 ساعة تانية لو دخل وخرج، وهيختفي منه العرض لو خلص من غير ما يطلب.
+  // ملحوظة: لو مسح بيانات المتصفح أو فتح من متصفح/جهاز تاني هيتحسب زائر جديد من الأول.
+  const DEADLINE_KEY = 'offarat_offer_deadline';
+  const ORDERED_KEY = 'offarat_has_ordered';
+  const OFFER_DURATION_MS = 24 * 60 * 60 * 1000;
+
+  function getDeadline(){
+    const saved = localStorage.getItem(DEADLINE_KEY);
+    if(saved){
+      const parsed = parseInt(saved, 10);
+      if(!isNaN(parsed)) return parsed;
+    }
+    const fresh = Date.now() + OFFER_DURATION_MS;
+    localStorage.setItem(DEADLINE_KEY, String(fresh));
+    return fresh;
+  }
+
+  const hasOrdered = localStorage.getItem(ORDERED_KEY) === '1';
+  const deadline = getDeadline();
+
+  const SECOND_CHANCE_PRICE = 830; // خصم 50% تقريبًا من 1665، فرصة تانية أقل من الـ70% الأصلي
+  const SECOND_CHANCE_LABEL = 'خصم 50%';
+
+  function expireOffer(){
+    if(offerExpired) return;
+    offerExpired = true;
+    unitPrice = SECOND_CHANCE_PRICE; // مش رجوع للسعر الكامل — فرصة تانية بخصم أقل
+    if(discountWrapEl){
+      const badgeEl = discountWrapEl.querySelector('.discount-badge');
+      if(badgeEl) badgeEl.textContent = SECOND_CHANCE_LABEL;
+    }
+    if(discountRibbonEl) discountRibbonEl.textContent = SECOND_CHANCE_LABEL;
+    if(countdownBoxEl){
+      countdownBoxEl.classList.add('expired');
+      countdownBoxEl.innerHTML = '<span>⏳ فاتك عرض الـ70%! بس عملنالك فرصة تانية بخصم 50%</span>';
+    }
+    if(priceNowEl) priceNowEl.textContent = SECOND_CHANCE_PRICE + ' ج.م';
+    if(unitPriceLineEl) unitPriceLineEl.textContent = SECOND_CHANCE_PRICE + ' ج.م';
+    updateTotal();
+  }
+
+  function formatTime(ms){
+    const totalSeconds = Math.max(Math.floor(ms / 1000), 0);
+    const h = String(Math.floor(totalSeconds / 3600)).padStart(2, '0');
+    const m = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, '0');
+    const s = String(totalSeconds % 60).padStart(2, '0');
+    return h + ':' + m + ':' + s;
+  }
+
+  let countdownIntervalId = null;
+
+  if(hasOrdered){
+    // العميل طلب قبل كده — العداد مالوش لازمة نعرضه تاني
+    if(countdownBoxEl) countdownBoxEl.style.display = 'none';
+  } else {
+    function tickCountdown(){
+      const remaining = deadline - Date.now();
+      if(remaining <= 0){
+        expireOffer();
+        if(countdownIntervalId) clearInterval(countdownIntervalId);
+        return;
+      }
+      if(countdownTimerEl) countdownTimerEl.textContent = formatTime(remaining);
+    }
+    tickCountdown();
+    countdownIntervalId = setInterval(tickCountdown, 1000);
   }
 
   if(qtyPlusBtn){
@@ -830,6 +927,7 @@ document.addEventListener('DOMContentLoaded', function(){
         // تقليل عداد "متبقي" فعليًا بعد إتمام الطلب بعدد القطع المطلوبة (نفس المنطق التوضيحي)
         baseStock = Math.max(baseStock - qty, STOCK_FLOOR);
         sessionStorage.setItem('offarat_stock', String(baseStock));
+        localStorage.setItem(ORDERED_KEY, '1');
         window.location.href = 'thank-you.html?total=' + total + '&eventId=' + encodeURIComponent(eventId);
       });
     });
