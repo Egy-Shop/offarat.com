@@ -41,7 +41,7 @@
     --line:#DCE9EC;
   }
   *{box-sizing:border-box; margin:0; padding:0;}
-  html{scroll-behavior:smooth;}
+  html{scroll-behavior:smooth; scroll-padding-top:90px;}
   body{
     font-family:'Tajawal', sans-serif;
     background:var(--mist);
@@ -113,12 +113,49 @@
   .discount-badge{
     background:var(--coral); color:#fff; font-size:12.5px; font-weight:900;
     padding:4px 10px; border-radius:100px;
+    animation:pulseBadge 1.8s ease-in-out infinite;
   }
   .price-note{font-size:13px; color:var(--ink-soft); flex-basis:100%;}
   .hero-btn{
     display:inline-block; background:var(--coral); color:#fff; font-weight:700;
     font-size:17px; padding:16px 34px; border-radius:10px; text-decoration:none;
     box-shadow:0 10px 24px -8px rgba(232,106,72,.55);
+    animation:pulseCta 2.2s ease-in-out infinite;
+    transition:transform .15s ease;
+  }
+  .hero-btn:hover{transform:translateY(-2px) scale(1.02); animation-play-state:paused;}
+  @keyframes pulseCta{
+    0%, 100% { box-shadow:0 10px 24px -8px rgba(232,106,72,.55); transform:translateY(0); }
+    50% { box-shadow:0 14px 30px -6px rgba(232,106,72,.8); transform:translateY(-2px); }
+  }
+  @keyframes pulseBadge{
+    0%, 100% { transform:scale(1); }
+    50% { transform:scale(1.08); }
+  }
+  .ribbon{
+    position:absolute; top:18px; inset-inline-start:18px; z-index:5;
+    background:var(--coral); color:#fff; font-weight:900; font-size:15px;
+    padding:10px 16px; border-radius:100px; box-shadow:0 8px 20px -6px rgba(0,0,0,.35);
+    animation:pulseBadge 1.8s ease-in-out infinite;
+  }
+  .urgency-bar{
+    display:flex; align-items:center; gap:8px; background:#FFF1EC; border:1px solid #FFD9CB;
+    color:var(--coral-deep); font-size:13.5px; font-weight:700; padding:10px 14px;
+    border-radius:10px; margin-bottom:18px; max-width:fit-content;
+  }
+  .urgency-bar strong{font-weight:900;}
+  .viewers-pill{
+    display:inline-flex; align-items:center; gap:8px; background:#fff; border:1px solid var(--line);
+    color:var(--sea-deep); font-size:13px; font-weight:700; padding:8px 14px;
+    border-radius:100px; margin-bottom:18px;
+  }
+  .viewers-pill .dot{
+    width:8px; height:8px; border-radius:50%; background:#2ECC71;
+    animation:dotPulse 1.4s ease-in-out infinite;
+  }
+  @keyframes dotPulse{
+    0%, 100% { opacity:1; transform:scale(1); }
+    50% { opacity:.4; transform:scale(1.3); }
   }
   .hero-trust{display:flex; gap:22px; margin-top:26px; flex-wrap:wrap;}
   .hero-trust div{font-size:13px; color:var(--sea-deep); font-weight:700; display:flex; align-items:center; gap:6px;}
@@ -139,6 +176,7 @@
   .problems{
     display:grid; grid-template-columns:repeat(4,1fr); gap:18px;
   }
+  .problems.warranty-grid{grid-template-columns:repeat(3,1fr);}
   .problems .card{
     background:var(--paper); border:1px solid var(--line); border-radius:14px;
     padding:22px 18px; text-align:center;
@@ -187,6 +225,7 @@
   .order{
     background:linear-gradient(160deg,#0F4C6B,#093347);
     color:#fff;
+    scroll-margin-top:90px;
   }
   .order .section-head h2{color:#fff;}
   .order .section-head p{color:#BFDBE2;}
@@ -237,8 +276,21 @@
     width:100%; margin-top:24px; background:var(--coral); color:#fff; border:none;
     padding:15px; border-radius:10px; font-family:'Tajawal',sans-serif;
     font-weight:900; font-size:16.5px; cursor:pointer;
+    animation:pulseCta 2.2s ease-in-out infinite;
+    transition:transform .15s ease;
   }
-  .submit-btn:hover{background:var(--coral-deep);}
+  .submit-btn:hover{background:var(--coral-deep); transform:translateY(-1px); animation-play-state:paused;}
+  .submit-btn:disabled{animation:none; opacity:.7; cursor:default;}
+  .stock-bar{
+    background:#FFF1EC; border:1px solid #FFD9CB; border-radius:10px;
+    padding:12px 14px; margin-bottom:18px; font-size:13.5px; color:var(--coral-deep); font-weight:700;
+  }
+  .stock-bar .track{
+    width:100%; height:6px; background:#FBD9CC; border-radius:100px; margin-top:8px; overflow:hidden;
+  }
+  .stock-bar .fill{
+    height:100%; background:var(--coral); border-radius:100px; transition:width .3s ease;
+  }
   .form-note{font-size:12px; color:var(--ink-soft); margin-top:10px; text-align:center;}
 
   /* reviews */
@@ -263,9 +315,10 @@
 
   footer{background:var(--sea-deep); color:#A9C9D1; padding:36px 0; text-align:center; font-size:13.5px;}
   footer .footer-logo{
-    display:inline-block; background:#fff; border-radius:10px; padding:8px 14px; margin-bottom:14px;
+    display:inline-flex; align-items:center; justify-content:center;
+    background:#fff; border-radius:10px; padding:8px 16px; margin-bottom:14px; line-height:0;
   }
-  footer .footer-logo img{height:24px;}
+  footer .footer-logo img{height:30px; width:auto; display:block;}
   footer .social-links{justify-content:center; margin:16px 0 4px;}
   footer .social-links a{background:rgba(255,255,255,.08);}
   footer .social-links svg{fill:#fff;}
@@ -283,14 +336,21 @@
   }
 
   @media (max-width:860px){
-    .hero .wrap{grid-template-columns:1fr; padding-block:32px;}
+    .hero .wrap{grid-template-columns:1fr; padding-block:14px; gap:14px;}
     .hero-img{order:-1;}
-    .hero-copy h1{font-size:26px; line-height:1.35;}
-    .hero-copy .lead{font-size:15.5px;}
-    .price-now{font-size:28px;}
-    .price-old{font-size:15px;}
-    .hero-btn{width:100%; text-align:center; padding:15px 20px; font-size:15.5px;}
+    .hero-img img{max-height:220px; width:100%; object-fit:cover; object-position:center 30%;}
+    .hero-copy .kicker{margin-bottom:8px; padding:5px 12px; font-size:12px;}
+    .viewers-pill{margin-bottom:8px;}
+    .hero-copy h1{font-size:21px; line-height:1.3; margin-bottom:8px;}
+    .hero-copy .lead{font-size:13.5px; margin-bottom:12px;}
+    .price-row{margin-bottom:14px;}
+    .price-now{font-size:26px;}
+    .price-old{font-size:14px;}
+    .hero-btn{width:100%; text-align:center; padding:14px 20px; font-size:15px;}
+    .hero-trust{margin-top:14px; gap:10px 16px;}
+    .hero-trust div{font-size:12px;}
     .problems{grid-template-columns:repeat(2,1fr);}
+    .problems.warranty-grid{grid-template-columns:1fr;}
     .feature-row, .feature-row:nth-child(even){grid-template-columns:1fr !important; gap:24px;}
     .feature-row:nth-child(even) .feature-copy{order:0;}
     .modes{grid-template-columns:1fr;}
@@ -309,6 +369,10 @@
     .cta-mini{padding:9px 16px; font-size:13.5px;}
     .sticky-cta strong{font-size:12.5px;}
     .sticky-cta a{padding:9px 14px; font-size:12.5px;}
+    .topbar{font-size:11.5px; padding:7px 10px; line-height:1.5;}
+    .site .wrap{padding-block:8px;}
+    .ribbon{top:10px; inset-inline-start:10px; padding:6px 12px; font-size:12.5px;}
+    .viewers-pill{font-size:12px; padding:6px 12px; margin-bottom:8px;}
   }
 </style>
 </head>
@@ -337,6 +401,7 @@
   <div class="wrap">
     <div class="hero-copy">
       <span class="kicker">جهاز تنظيف البشرة بالموجات فوق الصوتية</span>
+      <div class="viewers-pill"><span class="dot"></span><span id="viewersCount">21</span> شخص بيشوفوا المنتج ده دلوقتي</div>
       <h1>وداعًا للرؤوس السوداء<br>مع تنظيف <em>عميق ولطيف</em> من أول استخدام</h1>
       <p class="lead">جهاز الترا سونيك 4 في 1 بيشيل الدهون والشوائب المتراكمة في المسام، ويحسّن امتصاص السيروم والكريم، وكل ده في دقايق من المنزل.</p>
       <div class="price-row">
@@ -354,6 +419,7 @@
       </div>
     </div>
     <div class="hero-img">
+      <span class="ribbon">خصم 70%</span>
       <img src="images/hero.png" alt="جهاز الترا سونيك لتنظيف البشرة">
     </div>
   </div>
@@ -524,7 +590,7 @@
       <span class="kicker">راحة بالك أهم حاجة</span>
       <h2>الضمان والاستبدال والاسترجاع</h2>
     </div>
-    <div class="problems" style="grid-template-columns:repeat(3,1fr);">
+    <div class="problems warranty-grid">
       <div class="card"><div class="ico">🔄</div><h3>استبدال واسترجاع</h3><p>خلال 14 يوم من تاريخ استلام الأوردر</p></div>
       <div class="card"><div class="ico">🛡️</div><h3>ضمان عام</h3><p>سنة كاملة على أي عيب صناعة في الجهاز</p></div>
       <div class="card"><div class="ico">📦</div><h3>إجراء بسيط</h3><p>قدّمي طلبك أونلاين ونتواصل معاكِ لاستكمال الخطوات</p></div>
@@ -545,6 +611,10 @@
     <div class="order-panel">
       <div class="order-summary">
         <img src="images/kit-1.png" alt="جهاز الترا سونيك مع الملحقات">
+        <div class="stock-bar">
+          🔥 متبقي فقط <strong id="stockCount">20</strong> قطعة بالسعر ده
+          <div class="track"><div class="fill" id="stockFill" style="width:100%;"></div></div>
+        </div>
         <h3>جهاز الترا سونيك لتنظيف البشرة 4 في 1</h3>
         <div class="line"><span>سعر القطعة</span><strong>499 ج.م</strong></div>
         <div class="line"><span>مصاريف الشحن</span><strong id="shippingValue">35 ج.م</strong></div>
@@ -643,14 +713,69 @@ document.addEventListener('DOMContentLoaded', function(){
     qtyPlusBtn.addEventListener('click', function(){
       qty = Math.min(qty + 1, 10);
       updateTotal();
+      renderStock();
     });
   }
   if(qtyMinusBtn){
     qtyMinusBtn.addEventListener('click', function(){
       qty = Math.max(qty - 1, 1);
       updateTotal();
+      renderStock();
     });
   }
+
+  // ===== عداد "متبقي فقط X قطعة" — رقم توضيحي لخلق شعور بالندرة، مش مخزون حقيقي مرتبط بقاعدة بيانات =====
+  const STOCK_MAX = 24;
+  const STOCK_FLOOR = 4;
+  const stockCountEl = document.getElementById('stockCount');
+  const stockFillEl = document.getElementById('stockFill');
+
+  function getBaseStock(){
+    const saved = sessionStorage.getItem('offarat_stock');
+    if(saved !== null) return parseInt(saved, 10);
+    const initial = Math.floor(Math.random() * (22 - 16 + 1)) + 16; // يبدأ عشوائي بين 16 و22 لكل زيارة جديدة
+    sessionStorage.setItem('offarat_stock', String(initial));
+    return initial;
+  }
+
+  let baseStock = getBaseStock();
+
+  function renderStock(){
+    const shown = Math.max(baseStock - (qty - 1), STOCK_FLOOR);
+    if(stockCountEl) stockCountEl.textContent = shown;
+    if(stockFillEl) stockFillEl.style.width = Math.max((shown / STOCK_MAX) * 100, 8) + '%';
+  }
+
+  function scheduleStockDecay(){
+    const delay = 25000 + Math.random() * 25000; // كل 25-50 ثانية تقريبًا
+    setTimeout(function(){
+      if(baseStock > STOCK_FLOOR + 1){
+        baseStock -= 1;
+        sessionStorage.setItem('offarat_stock', String(baseStock));
+        renderStock();
+      }
+      scheduleStockDecay();
+    }, delay);
+  }
+
+  renderStock();
+  scheduleStockDecay();
+
+  // ===== عداد "كذا شخص بيشوف الصفحة" — رقم توضيحي بيتحرك بشكل عشوائي بسيط لإعطاء إحساس بالتفاعل =====
+  const viewersEl = document.getElementById('viewersCount');
+  let viewers = Math.floor(Math.random() * (29 - 14 + 1)) + 14;
+  if(viewersEl) viewersEl.textContent = viewers;
+
+  function scheduleViewersTick(){
+    const delay = 4000 + Math.random() * 4000; // كل 4-8 ثواني
+    setTimeout(function(){
+      const step = Math.floor(Math.random() * 3) - 1; // -1, 0, أو 1
+      viewers = Math.min(Math.max(viewers + step, 9), 34);
+      if(viewersEl) viewersEl.textContent = viewers;
+      scheduleViewersTick();
+    }, delay);
+  }
+  scheduleViewersTick();
 
   if(orderForm){
     const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxRT1Kih_9b745xJMVF0sCQ39BVP9D7lc-4x3OALFvA2Js7uO_-nWyTHperQEZ4AVAxqA/exec';
@@ -703,6 +828,9 @@ document.addEventListener('DOMContentLoaded', function(){
       }).catch(function(err){
         console.error('Order send error:', err);
       }).finally(function(){
+        // تقليل عداد "متبقي" فعليًا بعد إتمام الطلب بعدد القطع المطلوبة (نفس المنطق التوضيحي)
+        baseStock = Math.max(baseStock - qty, STOCK_FLOOR);
+        sessionStorage.setItem('offarat_stock', String(baseStock));
         window.location.href = 'thank-you.html?total=' + total + '&eventId=' + encodeURIComponent(eventId);
       });
     });
